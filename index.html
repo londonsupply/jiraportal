@@ -53,10 +53,9 @@
 
     .brand-mark {
       width: 28px; height: 28px;
-      background: var(--text);
       border-radius: 6px;
       display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
+      flex-shrink: 0; overflow: hidden;
     }
 
     .brand-name { font-size: 14px; font-weight: 700; letter-spacing: -.3px; }
@@ -391,10 +390,8 @@
   <div class="topbar">
     <div class="brand">
       <div class="brand-mark">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" fill="white" fill-opacity=".95"/>
-          <polyline points="9 22 9 12 15 12 15 22" fill="white" fill-opacity=".5"/>
-        </svg>
+        <img src="data:image/png;base64,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" 
+             alt="London Supply" width="28" height="28" style="border-radius:6px;display:block;object-fit:cover;" />
       </div>
       <span class="brand-name">London Supply</span>
       <div class="brand-sep"></div>
@@ -512,97 +509,49 @@
     <div class="section-label">Categorías de solicitud</div>
     <div class="cat-grid">
 
-      <a class="cat-card" style="--cat-color:#4A6FFF" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1" target="_blank">
-        <div class="cat-top">
-          <div class="cat-ico" style="background:#EEF2FF;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4A6FFF" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
-          <div>
-            <div class="cat-name">Soporte IT / Equipos</div>
-            <div class="cat-desc">Hardware, software, red y conectividad</div>
-          </div>
-        </div>
-        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
-      </a>
-
-      <a class="cat-card" style="--cat-color:#00875A" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1" target="_blank">
-        <div class="cat-top">
-          <div class="cat-ico" style="background:#E3FCEF;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00875A" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-          </div>
-          <div>
-            <div class="cat-name">Solicitudes RRHH</div>
-            <div class="cat-desc">Licencias, liquidaciones y certificados</div>
-          </div>
-        </div>
-        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
-      </a>
-
-      <a class="cat-card" style="--cat-color:#6554C0" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1" target="_blank">
-        <div class="cat-top">
-          <div class="cat-ico" style="background:#EAE6FF;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6554C0" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-          </div>
-          <div>
-            <div class="cat-name">Logística / Insumos</div>
-            <div class="cat-desc">Pedidos de materiales y suministros</div>
-          </div>
-        </div>
-        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
-      </a>
-
-      <a class="cat-card" style="--cat-color:#FF5630" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1" target="_blank">
-        <div class="cat-top">
-          <div class="cat-ico" style="background:#FFEBE6;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF5630" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          </div>
-          <div>
-            <div class="cat-name">Reportar incidente</div>
-            <div class="cat-desc">Fallas, interrupciones o urgencias</div>
-          </div>
-        </div>
-        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
-      </a>
-
+      <!-- 1. Reportar incidentes SAP -->
       <a class="cat-card" style="--cat-color:#9A7020" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/88" target="_blank">
         <div class="cat-top">
           <div class="cat-ico" style="background:#FAF4E6;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9A7020" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 12h10M7 8h10M7 16h6"/></svg>
           </div>
           <div>
-            <div class="cat-name">SAP</div>
-            <div class="cat-desc">Errores, accesos y consultas del sistema</div>
+            <div class="cat-name">Reportar incidente SAP</div>
+            <div class="cat-desc">Fallas y errores en el sistema SAP</div>
           </div>
         </div>
         <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
       </a>
 
-      <a class="cat-card" style="--cat-color:#0694A2" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/286" target="_blank">
-        <div class="cat-top">
-          <div class="cat-ico" style="background:#E0F5F5;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0694A2" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/><path d="M9 7h6M9 11h4"/></svg>
-          </div>
-          <div>
-            <div class="cat-name">Servicios · Telefonía · Avaya</div>
-            <div class="cat-desc">Telefonía fija, móviles y central Avaya</div>
-          </div>
-        </div>
-        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
-      </a>
-
+      <!-- 2. Reportar incidentes Softland/Cegid -->
       <a class="cat-card" style="--cat-color:#C027B0" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/4" target="_blank">
         <div class="cat-top">
           <div class="cat-ico" style="background:#FCE8FA;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C027B0" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h.01M10 8h7M7 11h.01M10 11h4"/></svg>
           </div>
           <div>
-            <div class="cat-name">Cegid y Softland</div>
-            <div class="cat-desc">Incidencias, reportes, funcionalidades y licencias</div>
+            <div class="cat-name">Reportar incidente Softland / Cegid</div>
+            <div class="cat-desc">Fallas en Softland o Cegid</div>
           </div>
         </div>
         <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
       </a>
 
+      <!-- 3. Reportar incidentes otros sistemas -->
+      <a class="cat-card" style="--cat-color:#FF5630" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/create/299" target="_blank">
+        <div class="cat-top">
+          <div class="cat-ico" style="background:#FFEBE6;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF5630" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div>
+            <div class="cat-name">Reportar incidente otros sistemas</div>
+            <div class="cat-desc">Fallas en otros sistemas o aplicaciones</div>
+          </div>
+        </div>
+        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
+      </a>
+
+      <!-- 4. Credenciales / Contraseñas -->
       <a class="cat-card" style="--cat-color:#E3650A" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/353" target="_blank">
         <div class="cat-top">
           <div class="cat-ico" style="background:#FEF0E6;">
@@ -616,6 +565,7 @@
         <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
       </a>
 
+      <!-- 5. Licencias · Software · Office -->
       <a class="cat-card" style="--cat-color:#D13438" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/352" target="_blank">
         <div class="cat-top">
           <div class="cat-ico" style="background:#FDE8E8;">
@@ -629,6 +579,7 @@
         <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
       </a>
 
+      <!-- 6. Consumibles -->
       <a class="cat-card" style="--cat-color:#2E7D32" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/19" target="_blank">
         <div class="cat-top">
           <div class="cat-ico" style="background:#E8F5E9;">
@@ -637,6 +588,76 @@
           <div>
             <div class="cat-name">Consumibles</div>
             <div class="cat-desc">Tóner, papel, cartuchos y materiales de oficina</div>
+          </div>
+        </div>
+        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
+      </a>
+
+      <!-- 7. Soporte IT / Equipos -->
+      <a class="cat-card" style="--cat-color:#4A6FFF" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/create/1" target="_blank">
+        <div class="cat-top">
+          <div class="cat-ico" style="background:#EEF2FF;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4A6FFF" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div>
+            <div class="cat-name">Soporte IT / Equipos</div>
+            <div class="cat-desc">Hardware, software, red y conectividad</div>
+          </div>
+        </div>
+        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
+      </a>
+
+      <!-- 8. Telefonía · Móvil · Avaya -->
+      <a class="cat-card" style="--cat-color:#0694A2" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/286" target="_blank">
+        <div class="cat-top">
+          <div class="cat-ico" style="background:#E0F5F5;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0694A2" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/><path d="M9 7h6M9 11h4"/></svg>
+          </div>
+          <div>
+            <div class="cat-name">Telefonía · Móvil · Avaya</div>
+            <div class="cat-desc">Telefonía fija, móviles y central Avaya</div>
+          </div>
+        </div>
+        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
+      </a>
+
+      <!-- 9. Ingresos RRHH -->
+      <a class="cat-card" style="--cat-color:#00875A" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/create/14" target="_blank">
+        <div class="cat-top">
+          <div class="cat-ico" style="background:#E3FCEF;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00875A" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div>
+            <div class="cat-name">Ingresos RRHH</div>
+            <div class="cat-desc">Incorporación de nuevos empleados</div>
+          </div>
+        </div>
+        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
+      </a>
+
+      <!-- 10. Soporte General -->
+      <a class="cat-card" style="--cat-color:#6554C0" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/354/create/1" target="_blank">
+        <div class="cat-top">
+          <div class="cat-ico" style="background:#EAE6FF;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6554C0" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div>
+            <div class="cat-name">Soporte General</div>
+            <div class="cat-desc">Solicitudes de servicio generales de IT</div>
+          </div>
+        </div>
+        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
+      </a>
+
+      <!-- 11. Solicitud de consumibles (Tintas, tóner) -->
+      <a class="cat-card" style="--cat-color:#546E7A" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/19" target="_blank">
+        <div class="cat-top">
+          <div class="cat-ico" style="background:#ECEFF1;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#546E7A" stroke-width="2"><path d="M12 2a5 5 0 00-5 5v3H5a2 2 0 00-2 2v8a2 2 0 002 2h14a2 2 0 002-2v-8a2 2 0 00-2-2h-2V7a5 5 0 00-5-5z"/><path d="M9 12h6M9 16h4"/></svg>
+          </div>
+          <div>
+            <div class="cat-name">Solicitud de consumibles</div>
+            <div class="cat-desc">Tintas, tóner y cartuchos de impresión</div>
           </div>
         </div>
         <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
