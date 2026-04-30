@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>London Supply · Mesa de Ayuda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F5F3EF;
+      --surface: #FFFFFF;
+      --surface2: #F0EDE8;
+      --border: #E0DBD3;
+      --text: #18150F;
+      --muted: #7A7168;
+      --gold: #9A7020;
+      --gold-bg: #FAF4E6;
+      --gold-border: #DFC98A;
+      --radius: 14px;
+      --red: #C0180C;
+      --red-bg: #FEF1F0;
+      --red-border: #F5C2BE;
+    }
+
+    html, body {
+      background: var(--bg);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .portal { display: flex; flex-direction: column; min-height: 100vh; }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand { display: flex; align-items: center; gap: 10px; }
+
+    .brand-mark {
+      width: 28px; height: 28px;
+      background: var(--text);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .brand-name { font-size: 14px; font-weight: 700; letter-spacing: -.3px; }
+    .brand-sep { width: 1px; height: 14px; background: var(--border); margin: 0 8px; }
+    .brand-dept { font-size: 12px; color: var(--muted); font-weight: 400; }
+
+    .topbar-right { display: flex; align-items: center; gap: 8px; }
+
+    .btn-outline-sm {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px; font-weight: 500;
+      cursor: pointer; text-decoration: none;
+      transition: all .2s;
+    }
+    .btn-outline-sm:hover { border-color: var(--text); background: var(--surface2); }
+
+    .btn-jira {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--text); color: white;
+      padding: 7px 16px; border-radius: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px; font-weight: 600;
+      cursor: pointer; border: none; text-decoration: none;
+      transition: opacity .2s;
+    }
+    .btn-jira:hover { opacity: .85; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--text);
+      padding: 44px 32px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute; right: -60px; top: -60px;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(184,136,42,.15) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-glow2 {
+      position: absolute; left: 40%; bottom: -80px;
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(255,255,255,.04) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-inner { max-width: 560px; position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,.45);
+      margin-bottom: 14px;
+    }
+
+    .hero-title {
+      font-size: 28px; font-weight: 700;
+      letter-spacing: -.6px; color: white;
+      line-height: 1.15; margin-bottom: 8px;
+    }
+
+    .hero-sub {
+      font-size: 13px; color: rgba(255,255,255,.5);
+      font-weight: 300; line-height: 1.6;
+      margin-bottom: 24px; max-width: 420px;
+    }
+
+    .hero-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: var(--gold-bg);
+      border: 1px solid var(--gold-border);
+      color: var(--gold);
+      padding: 10px 20px; border-radius: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px; font-weight: 700;
+      cursor: pointer; text-decoration: none;
+      transition: all .2s;
+    }
+    .hero-cta:hover { background: #fff; border-color: var(--gold); }
+
+    .hero-cta-sec {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      color: rgba(255,255,255,.85);
+      padding: 10px 18px; border-radius: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      transition: all .2s;
+    }
+    .hero-cta-sec:hover { background: rgba(255,255,255,.13); border-color: rgba(255,255,255,.28); }
+
+    .hero-note { margin-top: 12px; font-size: 11px; color: rgba(255,255,255,.3); }
+    .hero-note a { color: rgba(255,255,255,.45); text-decoration: underline; }
+
+    /* ── STATS ── */
+    .stats {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .stat-item {
+      padding: 14px 20px;
+      border-right: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .stat-item:last-child { border-right: none; }
+
+    .stat-ico {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .stat-num { font-size: 17px; font-weight: 700; letter-spacing: -.4px; line-height: 1; }
+    .stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* ── MAIN ── */
+    .main { flex: 1; padding: 26px 32px; width: 100%; }
+
+    .section-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 14px;
+    }
+
+    /* ── P1 BANNER ── */
+    .p1-banner {
+      background: var(--red-bg);
+      border: 1.5px solid var(--red-border);
+      border-radius: var(--radius);
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+
+    .p1-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px;
+      cursor: pointer; gap: 12px;
+      user-select: none;
+    }
+
+    .p1-header-left { display: flex; align-items: center; gap: 12px; }
+
+    .p1-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--red); color: white;
+      font-size: 11px; font-weight: 700; letter-spacing: .5px;
+      padding: 4px 10px; border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .p1-pulse {
+      width: 6px; height: 6px; border-radius: 50%; background: white;
+      animation: pp 1.4s infinite;
+    }
+
+    @keyframes pp { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+
+    .p1-title { font-size: 13px; font-weight: 700; color: var(--red); line-height: 1.3; }
+    .p1-subtitle { font-size: 11px; color: #9B3228; margin-top: 2px; }
+
+    .p1-toggle {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; color: var(--red);
+      flex-shrink: 0; white-space: nowrap;
+    }
+
+    .p1-chevron { transition: transform .25s; }
+    .p1-chevron.open { transform: rotate(180deg); }
+
+    .p1-body {
+      display: none;
+      border-top: 1px solid var(--red-border);
+      padding: 18px 20px 20px;
+    }
+    .p1-body.open { display: block; }
+
+    .p1-warning {
+      display: flex; align-items: flex-start; gap: 10px;
+      background: #FDE8E7;
+      border: 1px solid #F5C2BE;
+      border-radius: 9px;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+    }
+
+    .p1-warning-ico {
+      width: 22px; height: 22px; border-radius: 5px;
+      background: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+
+    .p1-warning-text { font-size: 12px; color: #7B1D17; line-height: 1.5; font-weight: 500; }
+    .p1-warning-text strong { color: var(--red); font-weight: 700; }
+
+    .p1-examples-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: #9B3228; margin-bottom: 10px;
+    }
+
+    .p1-examples { display: flex; flex-direction: column; gap: 7px; margin-bottom: 20px; }
+
+    .p1-example {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 12px; color: #5C1A16; line-height: 1.5;
+    }
+
+    .p1-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--red); flex-shrink: 0; margin-top: 5px;
+    }
+
+    .p1-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--red); color: white;
+      padding: 11px 22px; border-radius: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px; font-weight: 700;
+      text-decoration: none; cursor: pointer;
+      transition: opacity .2s;
+    }
+    .p1-cta:hover { opacity: .88; }
+
+    /* ── CATEGORY GRID ── */
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+      gap: 9px;
+      margin-bottom: 26px;
+    }
+
+    .cat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 15px;
+      cursor: pointer; text-decoration: none;
+      display: flex; flex-direction: column; gap: 11px;
+      transition: all .2s;
+      position: relative; overflow: hidden;
+    }
+
+    .cat-card::after {
+      content: '↗';
+      position: absolute; top: 13px; right: 13px;
+      font-size: 12px; color: var(--muted);
+      opacity: 0; transform: translateX(-4px);
+      transition: all .2s;
+    }
+
+    .cat-card:hover {
+      border-color: var(--cat-color);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,.07);
+    }
+    .cat-card:hover::after { opacity: 1; transform: translateX(0); }
+
+    .cat-top { display: flex; align-items: flex-start; gap: 10px; }
+
+    .cat-ico {
+      width: 34px; height: 34px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .cat-name { font-size: 12px; font-weight: 700; letter-spacing: -.1px; line-height: 1.3; color: var(--text); }
+    .cat-desc { font-size: 10px; color: var(--muted); line-height: 1.45; margin-top: 2px; }
+
+    .cat-footer {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 10px; color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 9px; margin-top: auto;
+    }
+
+    .cat-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--cat-color); flex-shrink: 0; }
+
+    /* ── INFO BOX ── */
+    .info-box {
+      background: var(--gold-bg);
+      border: 1px solid var(--gold-border);
+      border-radius: 12px;
+      padding: 15px 18px;
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+
+    .info-ico {
+      width: 30px; height: 30px; border-radius: 8px;
+      background: rgba(154,112,32,.12);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+
+    .info-title { font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 3px; }
+    .info-body { font-size: 11px; color: #7A6030; line-height: 1.5; }
+
+    .info-link {
+      display: inline-flex; align-items: center; gap: 4px;
+      margin-top: 8px; font-size: 11px; font-weight: 600;
+      color: var(--gold); text-decoration: none;
+    }
+    .info-link:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 14px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .footer-left { font-size: 11px; color: var(--muted); }
+    .footer-right { display: flex; gap: 16px; }
+
+    .footer-link { font-size: 11px; color: var(--muted); text-decoration: none; }
+    .footer-link:hover { color: var(--text); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .topbar { padding: 0 16px; }
+      .brand-dept { display: none; }
+      .btn-outline-sm span { display: none; }
+      .hero { padding: 32px 16px 28px; }
+      .stats { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-item:last-child { border-bottom: none; }
+      .main { padding: 20px 16px; }
+      .cat-grid { grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); }
+      .footer { flex-direction: column; gap: 10px; text-align: center; padding: 14px 16px; }
+      .footer-right { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+<div class="portal">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" fill="white" fill-opacity=".95"/>
+          <polyline points="9 22 9 12 15 12 15 22" fill="white" fill-opacity=".5"/>
+        </svg>
+      </div>
+      <span class="brand-name">London Supply</span>
+      <div class="brand-sep"></div>
+      <span class="brand-dept">Portal interno de soporte</span>
+    </div>
+    <div class="topbar-right">
+      <a class="btn-outline-sm" href="https://londonsupply.atlassian.net/servicedesk/customer/user/requests?reporter=all&statuses=open" target="_blank">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+        </svg>
+        <span>Mis solicitudes abiertas</span>
+      </a>
+      <a class="btn-jira" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1" target="_blank">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+          <polyline points="15 3 21 3 21 9"/>
+          <line x1="10" y1="14" x2="21" y2="3"/>
+        </svg>
+        Ir a Jira
+      </a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Mesa de ayuda · BA London Supply</div>
+      <div class="hero-title">¿En qué podemos<br>ayudarte hoy?</div>
+      <div class="hero-sub">Seleccioná una categoría para abrir una solicitud. Serás redirigido a Jira Service Management para completar el formulario.</div>
+      <div class="hero-actions">
+        <a class="hero-cta" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+          </svg>
+          Crear nuevo ticket
+        </a>
+        <a class="hero-cta-sec" href="https://londonsupply.atlassian.net/servicedesk/customer/user/requests?reporter=all&statuses=open" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          Mis solicitudes abiertas
+        </a>
+      </div>
+      <div class="hero-note">
+        Necesitás tu cuenta corporativa de Atlassian para ingresar.
+        <a href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1" target="_blank">¿Problemas para acceder?</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat-item">
+      <div class="stat-ico" style="background:#EEF2FF;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4A6FFF" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div><div class="stat-num">8 hs</div><div class="stat-label">Tiempo de respuesta promedio</div></div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-ico" style="background:#E3FCEF;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00875A" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div><div class="stat-num">94%</div><div class="stat-label">Tickets resueltos este mes</div></div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-ico" style="background:#FBF5E8;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9A7020" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+        </svg>
+      </div>
+      <div><div class="stat-num">Lun – Vie</div><div class="stat-label">Soporte disponible 8:00 – 18:00</div></div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- P1 BANNER -->
+    <div class="p1-banner">
+      <div class="p1-header" onclick="toggleP1()" role="button" aria-expanded="false" id="p1trigger">
+        <div class="p1-header-left">
+          <div class="p1-badge"><span class="p1-pulse"></span>P1</div>
+          <div>
+            <div class="p1-title">Reporte de incidencia crítica P1</div>
+            <div class="p1-subtitle">Solo para incidentes de máxima prioridad que afectan la operación completa</div>
+          </div>
+        </div>
+        <div class="p1-toggle">
+          <span id="toggleLabel">Ver criterios</span>
+          <svg class="p1-chevron" id="p1chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="p1-body" id="p1body">
+        <div class="p1-warning">
+          <div class="p1-warning-ico">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+          <div class="p1-warning-text">
+            <strong>Para cualquier incidente que no sea P1, canalizar exclusivamente por Service Desk.</strong><br>
+            Usar este canal para incidentes que no califican como P1 genera demoras en la atención de emergencias reales.
+          </div>
+        </div>
+
+        <div class="p1-examples-label">¿Qué consideramos P1?</div>
+        <div class="p1-examples">
+          <div class="p1-example"><span class="p1-dot"></span>Caída total de SAP productivo en una o varias sociedades.</div>
+          <div class="p1-example"><span class="p1-dot"></span>Indisponibilidad general de red afectando a una sede completa o múltiples sedes.</div>
+          <div class="p1-example"><span class="p1-dot"></span>Corte de datacenter o virtualización con impacto en servicios corporativos.</div>
+          <div class="p1-example"><span class="p1-dot"></span>Caída del firewall perimetral o VPN corporativa sin alternativas.</div>
+          <div class="p1-example"><span class="p1-dot"></span>Imposibilidad de operar cajas o CEGID en toda una sucursal o en varias.</div>
+          <div class="p1-example"><span class="p1-dot"></span>Incidente de seguridad severo en curso (ransomware, exfiltración de datos).</div>
+          <div class="p1-example"><span class="p1-dot"></span>Interrupción del correo corporativo a nivel general.</div>
+        </div>
+
+        <a class="p1-cta" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/88/create/334" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          Reportar incidencia P1
+        </a>
+      </div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="section-label">Categorías de solicitud</div>
+    <div class="cat-grid">
+
+      <a class="cat-card" style="--cat-color:#4A6FFF" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1" target="_blank">
+        <div class="cat-top">
+          <div class="cat-ico" style="background:#EEF2FF;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4A6FFF" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div>
+            <div class="cat-name">Soporte IT / Equipos</div>
+            <div class="cat-desc">Hardware, software, red y conectividad</div>
+          </div>
+        </div>
+        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
+      </a>
+
+      <a class="cat-card" style="--cat-color:#00875A" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1" target="_blank">
+        <div class="cat-top">
+          <div class="cat-ico" style="background:#E3FCEF;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00875A" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div>
+            <div class="cat-name">Solicitudes RRHH</div>
+            <div class="cat-desc">Licencias, liquidaciones y certificados</div>
+          </div>
+        </div>
+        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
+      </a>
+
+      <a class="cat-card" style="--cat-color:#6554C0" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1" target="_blank">
+        <div class="cat-top">
+          <div class="cat-ico" style="background:#EAE6FF;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6554C0" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <div>
+            <div class="cat-name">Logística / Insumos</div>
+            <div class="cat-desc">Pedidos de materiales y suministros</div>
+          </div>
+        </div>
+        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
+      </a>
+
+      <a class="cat-card" style="--cat-color:#FF5630" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1" target="_blank">
+        <div class="cat-top">
+          <div class="cat-ico" style="background:#FFEBE6;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF5630" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div>
+            <div class="cat-name">Reportar incidente</div>
+            <div class="cat-desc">Fallas, interrupciones o urgencias</div>
+          </div>
+        </div>
+        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
+      </a>
+
+      <a class="cat-card" style="--cat-color:#9A7020" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/88" target="_blank">
+        <div class="cat-top">
+          <div class="cat-ico" style="background:#FAF4E6;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9A7020" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 12h10M7 8h10M7 16h6"/></svg>
+          </div>
+          <div>
+            <div class="cat-name">SAP</div>
+            <div class="cat-desc">Errores, accesos y consultas del sistema</div>
+          </div>
+        </div>
+        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
+      </a>
+
+      <a class="cat-card" style="--cat-color:#0694A2" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/286" target="_blank">
+        <div class="cat-top">
+          <div class="cat-ico" style="background:#E0F5F5;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0694A2" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/><path d="M9 7h6M9 11h4"/></svg>
+          </div>
+          <div>
+            <div class="cat-name">Servicios · Telefonía · Avaya</div>
+            <div class="cat-desc">Telefonía fija, móviles y central Avaya</div>
+          </div>
+        </div>
+        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
+      </a>
+
+      <a class="cat-card" style="--cat-color:#C027B0" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/4" target="_blank">
+        <div class="cat-top">
+          <div class="cat-ico" style="background:#FCE8FA;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C027B0" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h.01M10 8h7M7 11h.01M10 11h4"/></svg>
+          </div>
+          <div>
+            <div class="cat-name">Cegid y Softland</div>
+            <div class="cat-desc">Incidencias, reportes, funcionalidades y licencias</div>
+          </div>
+        </div>
+        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
+      </a>
+
+      <a class="cat-card" style="--cat-color:#E3650A" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/353" target="_blank">
+        <div class="cat-top">
+          <div class="cat-ico" style="background:#FEF0E6;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E3650A" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><circle cx="12" cy="16" r="1" fill="#E3650A"/></svg>
+          </div>
+          <div>
+            <div class="cat-name">Credenciales / Contraseñas</div>
+            <div class="cat-desc">Reseteo y gestión de accesos</div>
+          </div>
+        </div>
+        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
+      </a>
+
+      <a class="cat-card" style="--cat-color:#D13438" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/352" target="_blank">
+        <div class="cat-top">
+          <div class="cat-ico" style="background:#FDE8E8;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D13438" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 13h6M9 17h4"/></svg>
+          </div>
+          <div>
+            <div class="cat-name">Licencias · Software · Office</div>
+            <div class="cat-desc">Solicitudes de licencias y herramientas Microsoft</div>
+          </div>
+        </div>
+        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
+      </a>
+
+      <a class="cat-card" style="--cat-color:#2E7D32" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/19" target="_blank">
+        <div class="cat-top">
+          <div class="cat-ico" style="background:#E8F5E9;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          </div>
+          <div>
+            <div class="cat-name">Consumibles</div>
+            <div class="cat-desc">Tóner, papel, cartuchos y materiales de oficina</div>
+          </div>
+        </div>
+        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
+      </a>
+
+    </div>
+
+    <!-- INFO BOX -->
+    <div class="info-box">
+      <div class="info-ico">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9A7020" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+      </div>
+      <div>
+        <div class="info-title">¿Primera vez que usás el sistema?</div>
+        <div class="info-body">Al hacer clic en cualquier categoría serás redirigido a Jira Service Management. Si es la primera vez, necesitás iniciar sesión con tu cuenta corporativa de Atlassian. Una vez dentro, el sistema recordará tu sesión.</div>
+        <a class="info-link" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1" target="_blank">Ir al portal de Jira ↗</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">London Supply · Mesa de Ayuda BA · Lunes a viernes 8:00 – 18:00 hs</div>
+    <div class="footer-right">
+      <a class="footer-link" href="https://londonsupply.atlassian.net/servicedesk/customer/user/requests?reporter=all&statuses=open" target="_blank">Mis solicitudes abiertas</a>
+      <a class="footer-link" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1" target="_blank">Crear ticket</a>
+      <a class="footer-link" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1" target="_blank">Portal Jira ↗</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function toggleP1() {
+    const body = document.getElementById('p1body');
+    const chevron = document.getElementById('p1chevron');
+    const label = document.getElementById('toggleLabel');
+    const trigger = document.getElementById('p1trigger');
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open');
+    chevron.classList.toggle('open');
+    label.textContent = isOpen ? 'Ver criterios' : 'Ocultar';
+    trigger.setAttribute('aria-expanded', String(!isOpen));
+  }
+</script>
+
+</body>
+</html>
