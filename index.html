@@ -291,7 +291,7 @@
       cursor: pointer; text-decoration: none;
       display: flex; flex-direction: column; gap: 11px;
       transition: all .2s;
-      position: relative; overflow: hidden;
+      position: relative; overflow: visible;
     }
 
     .cat-card::after {
@@ -383,30 +383,26 @@
     }
 
     /* TOOLTIP */
-    .tooltip-wrap { position: relative; }
+    .tooltip-wrap { position: relative; display: inline-flex; }
     .tooltip-wrap .tooltip-box {
-      display: none;
-      position: absolute;
-      bottom: calc(100% + 8px);
-      left: 50%; transform: translateX(-50%);
+      visibility: hidden;
+      opacity: 0;
+      position: fixed;
       background: #1A1714;
       color: #F5F3EF;
-      font-size: 11px; line-height: 1.5;
-      padding: 10px 13px;
+      font-size: 11px; line-height: 1.6;
+      padding: 12px 14px;
       border-radius: 9px;
-      width: 240px;
-      z-index: 200;
-      box-shadow: 0 4px 16px rgba(0,0,0,.18);
+      width: 260px;
+      z-index: 9999;
+      box-shadow: 0 6px 24px rgba(0,0,0,.25);
       pointer-events: none;
+      transition: opacity .15s;
     }
-    .tooltip-wrap .tooltip-box::after {
-      content: '';
-      position: absolute;
-      top: 100%; left: 50%; transform: translateX(-50%);
-      border: 6px solid transparent;
-      border-top-color: #1A1714;
+    .tooltip-wrap:hover .tooltip-box {
+      visibility: visible;
+      opacity: 1;
     }
-    .tooltip-wrap:hover .tooltip-box { display: block; }
     .tooltip-icon {
       display: inline-flex; align-items: center; justify-content: center;
       width: 16px; height: 16px; border-radius: 50%;
@@ -704,9 +700,9 @@
           <div>
             <div class="cat-name" style="display:flex;align-items:center;gap:4px;">
               Ingresos RRHH
-              <div class="tooltip-wrap">
+              <div class="tooltip-wrap" onmouseenter="posTooltip(event)" onmouseleave="">
                 <span class="tooltip-icon">!</span>
-                <div class="tooltip-box">⚠️ Las solicitudes deben informarse con un mínimo de <strong>15 días hábiles</strong> de anticipación. Las solicitudes fuera de plazo pueden afectar los tiempos de provisión de accesos, equipamiento y configuraciones, sin garantía de cumplimiento para la fecha solicitada.</div>
+                <div class="tooltip-box" id="rrhh-tip">⚠️ Las solicitudes deben informarse con un mínimo de <strong>15 días hábiles</strong> de anticipación. Las solicitudes fuera de plazo pueden afectar los tiempos de provisión de accesos, equipamiento y configuraciones, sin garantía de cumplimiento para la fecha solicitada.</div>
               </div>
             </div>
             <div class="cat-desc">Incorporación de nuevos empleados</div>
@@ -775,5 +771,14 @@
   }
 </script>
 
+
+<script>
+  function posTooltip(e) {
+    var tip = document.getElementById('rrhh-tip');
+    var rect = e.currentTarget.getBoundingClientRect();
+    tip.style.left = (rect.left - 100) + 'px';
+    tip.style.top = (rect.top - 130) + 'px';
+  }
+</script>
 </body>
 </html>
