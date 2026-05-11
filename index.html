@@ -381,6 +381,40 @@
       .footer { flex-direction: column; gap: 10px; text-align: center; padding: 14px 16px; }
       .footer-right { flex-wrap: wrap; justify-content: center; }
     }
+
+    /* TOOLTIP */
+    .tooltip-wrap { position: relative; }
+    .tooltip-wrap .tooltip-box {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%; transform: translateX(-50%);
+      background: #1A1714;
+      color: #F5F3EF;
+      font-size: 11px; line-height: 1.5;
+      padding: 10px 13px;
+      border-radius: 9px;
+      width: 240px;
+      z-index: 200;
+      box-shadow: 0 4px 16px rgba(0,0,0,.18);
+      pointer-events: none;
+    }
+    .tooltip-wrap .tooltip-box::after {
+      content: '';
+      position: absolute;
+      top: 100%; left: 50%; transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: #1A1714;
+    }
+    .tooltip-wrap:hover .tooltip-box { display: block; }
+    .tooltip-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: #FEF0E6; color: #E3650A;
+      font-size: 10px; font-weight: 700;
+      margin-left: 5px; cursor: help; flex-shrink: 0;
+      border: 1px solid #E3650A;
+    }
   </style>
 </head>
 <body>
@@ -477,7 +511,8 @@
           </div>
           <div class="p1-warning-text">
             <strong>Para cualquier incidente que no sea P1, canalizar exclusivamente por Service Desk.</strong><br>
-            Usar este canal para incidentes que no califican como P1 genera demoras en la atención de emergencias reales.
+            Usar este canal para incidentes que no califican como P1 genera demoras en la atención de emergencias reales.<br><br>
+            <strong>⛔ Todo incidente reportado que no cumpla los criterios de P1 será desestimado y deberá canalizarse nuevamente por Service Desk.</strong>
           </div>
         </div>
 
@@ -667,7 +702,13 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00875A" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
           </div>
           <div>
-            <div class="cat-name">Ingresos RRHH</div>
+            <div class="cat-name" style="display:flex;align-items:center;gap:4px;">
+              Ingresos RRHH
+              <div class="tooltip-wrap">
+                <span class="tooltip-icon">!</span>
+                <div class="tooltip-box">⚠️ Las solicitudes deben informarse con un mínimo de <strong>15 días hábiles</strong> de anticipación. Las solicitudes fuera de plazo pueden afectar los tiempos de provisión de accesos, equipamiento y configuraciones, sin garantía de cumplimiento para la fecha solicitada.</div>
+              </div>
+            </div>
             <div class="cat-desc">Incorporación de nuevos empleados</div>
           </div>
         </div>
