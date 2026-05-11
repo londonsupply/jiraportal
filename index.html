@@ -382,35 +382,56 @@
       .footer-right { flex-wrap: wrap; justify-content: center; }
     }
 
-    /* TOOLTIP */
-    .tooltip-wrap { position: relative; display: inline-flex; }
-    .tooltip-wrap .tooltip-box {
-      visibility: hidden;
-      opacity: 0;
-      position: fixed;
-      background: #1A1714;
-      color: #F5F3EF;
-      font-size: 11px; line-height: 1.6;
-      padding: 12px 14px;
-      border-radius: 9px;
-      width: 260px;
+
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.5);
       z-index: 9999;
-      box-shadow: 0 6px 24px rgba(0,0,0,.25);
-      pointer-events: none;
-      transition: opacity .15s;
+      align-items: center; justify-content: center;
     }
-    .tooltip-wrap:hover .tooltip-box {
-      visibility: visible;
-      opacity: 1;
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: #fff;
+      border-radius: 14px;
+      padding: 28px;
+      max-width: 420px; width: 90%;
+      box-shadow: 0 12px 40px rgba(0,0,0,.2);
     }
-    .tooltip-icon {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 16px; height: 16px; border-radius: 50%;
-      background: #FEF0E6; color: #E3650A;
-      font-size: 10px; font-weight: 700;
-      margin-left: 5px; cursor: help; flex-shrink: 0;
-      border: 1px solid #E3650A;
+    .modal-icon {
+      font-size: 28px; margin-bottom: 12px;
     }
+    .modal-title {
+      font-size: 16px; font-weight: 700;
+      color: #18150F; margin-bottom: 12px;
+      letter-spacing: -.3px;
+    }
+    .modal-body {
+      font-size: 13px; color: #5A5248;
+      line-height: 1.6; margin-bottom: 24px;
+    }
+    .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+    .modal-cancel {
+      background: transparent;
+      border: 1px solid #E0DBD3;
+      color: #7A7168;
+      padding: 9px 18px; border-radius: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all .15s;
+    }
+    .modal-cancel:hover { background: #F5F3EF; color: #18150F; }
+    .modal-confirm {
+      background: #18150F; color: white;
+      border: none;
+      padding: 9px 20px; border-radius: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: opacity .15s;
+    }
+    .modal-confirm:hover { opacity: .85; }
   </style>
 </head>
 <body>
@@ -692,24 +713,18 @@
       </a>
 
       <!-- 11. Ingresos RRHH -->
-      <a class="cat-card" style="--cat-color:#00875A" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/create/14" target="_blank">
+      <div class="cat-card" style="--cat-color:#00875A;cursor:pointer;" onclick="openRRHHModal()">
         <div class="cat-top">
           <div class="cat-ico" style="background:#E3FCEF;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00875A" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
           </div>
           <div>
-            <div class="cat-name" style="display:flex;align-items:center;gap:4px;">
-              Ingresos RRHH
-              <div class="tooltip-wrap" onmouseenter="posTooltip(event)" onmouseleave="">
-                <span class="tooltip-icon">!</span>
-                <div class="tooltip-box" id="rrhh-tip">⚠️ Las solicitudes deben informarse con un mínimo de <strong>15 días hábiles</strong> de anticipación. Las solicitudes fuera de plazo pueden afectar los tiempos de provisión de accesos, equipamiento y configuraciones, sin garantía de cumplimiento para la fecha solicitada.</div>
-              </div>
-            </div>
+            <div class="cat-name">Ingresos RRHH</div>
             <div class="cat-desc">Incorporación de nuevos empleados</div>
           </div>
         </div>
         <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
-      </a>
+      </div>
 
       <!-- 12. Solicitud de consumibles -->
       <a class="cat-card" style="--cat-color:#546E7A" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/19" target="_blank">
@@ -773,12 +788,36 @@
 
 
 <script>
-  function posTooltip(e) {
-    var tip = document.getElementById('rrhh-tip');
-    var rect = e.currentTarget.getBoundingClientRect();
-    tip.style.left = (rect.left - 100) + 'px';
-    tip.style.top = (rect.top - 130) + 'px';
+  function openRRHHModal() {
+    document.getElementById('rrhhModal').classList.add('open');
   }
+  function closeRRHHModal() {
+    document.getElementById('rrhhModal').classList.remove('open');
+  }
+  function confirmRRHH() {
+    window.open('https://londonsupply.atlassian.net/servicedesk/customer/portal/1/create/14', '_blank');
+    closeRRHHModal();
+  }
+  // Close on overlay click
+  document.getElementById('rrhhModal').addEventListener('click', function(e) {
+    if (e.target === this) closeRRHHModal();
+  });
 </script>
+
+<!-- RRHH MODAL -->
+<div class="modal-overlay" id="rrhhModal">
+  <div class="modal-box">
+    <div class="modal-icon">⚠️</div>
+    <div class="modal-title">Importante antes de continuar</div>
+    <div class="modal-body">
+      Toda solicitud de incorporación de nuevos recursos humanos deberá ser informada con un mínimo de <strong>15 días hábiles de anticipación</strong> a la fecha de ingreso.<br><br>
+      Las solicitudes recibidas fuera de este plazo podrán afectar los tiempos de provisión y configuración de accesos, equipamiento y demás requerimientos asociados al alta, por lo que <strong>no se garantiza el cumplimiento total de los pedidos para la fecha solicitada.</strong>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeRRHHModal()">Cancelar</button>
+      <button class="modal-confirm" onclick="confirmRRHH()">Entendido, continuar →</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
