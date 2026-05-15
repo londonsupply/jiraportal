@@ -670,8 +670,22 @@
         <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
       </a>
 
+      <!-- Solicitud de equipos -->
+      <a class="cat-card" style="--cat-color:#1565C0" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/420/create/4" target="_blank">
+        <div class="cat-top">
+          <div class="cat-ico" style="background:#E3F2FD;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="M7 8h4M7 11h2"/></svg>
+          </div>
+          <div>
+            <div class="cat-name">Solicitud de equipos</div>
+            <div class="cat-desc">Pedido de computadoras, monitores, periféricos y equipamiento de trabajo</div>
+          </div>
+        </div>
+        <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
+      </a>
+
       <!-- 9. Solicitudes de cambio -->
-      <a class="cat-card" style="--cat-color:#8D6E63" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/486" target="_blank">
+      <div class="cat-card" style="--cat-color:#8D6E63;cursor:pointer;" onclick="openCambioModal()">
         <div class="cat-top">
           <div class="cat-ico" style="background:#EFEBE9;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8D6E63" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
@@ -682,7 +696,7 @@
           </div>
         </div>
         <div class="cat-footer"><span class="cat-dot"></span>Abrir en Jira</div>
-      </a>
+      </div>
 
       <!-- 10. Telefonía · Móvil · Avaya -->
       <a class="cat-card" style="--cat-color:#0694A2" href="https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/286" target="_blank">
@@ -802,6 +816,20 @@
   document.getElementById('rrhhModal').addEventListener('click', function(e) {
     if (e.target === this) closeRRHHModal();
   });
+
+  function openCambioModal() {
+    document.getElementById('cambioModal').classList.add('open');
+  }
+  function closeCambioModal() {
+    document.getElementById('cambioModal').classList.remove('open');
+  }
+  function confirmCambio() {
+    window.open('https://londonsupply.atlassian.net/servicedesk/customer/portal/1/group/486', '_blank');
+    closeCambioModal();
+  }
+  document.getElementById('cambioModal').addEventListener('click', function(e) {
+    if (e.target === this) closeCambioModal();
+  });
 </script>
 
 <!-- RRHH MODAL -->
@@ -816,6 +844,26 @@
     <div class="modal-actions">
       <button class="modal-cancel" onclick="closeRRHHModal()">Cancelar</button>
       <button class="modal-confirm" onclick="confirmRRHH()">Entendido, continuar →</button>
+    </div>
+  </div>
+</div>
+
+<!-- CAMBIO MODAL -->
+<div class="modal-overlay" id="cambioModal">
+  <div class="modal-box">
+    <div class="modal-icon">⚠️</div>
+    <div class="modal-title">Importante antes de continuar</div>
+    <div class="modal-body">
+      Las solicitudes de cambio están sujetas a un proceso formal que incluye las siguientes etapas:<br><br>
+      <strong>1. Relevamiento</strong> — análisis detallado del requerimiento por parte del equipo técnico.<br><br>
+      <strong>2. Evaluación de impacto</strong> — revisión de dependencias, recursos necesarios y posibles afectaciones a otros sistemas o procesos.<br><br>
+      <strong>3. Aprobación</strong> — validación por parte del responsable del área y, cuando corresponda, de la gerencia.<br><br>
+      <strong>4. Planificación</strong> — asignación de prioridad, recursos y estimación de tiempos de implementación.<br><br>
+      Los plazos de ejecución dependerán de la complejidad y prioridad asignada. <strong>No se garantiza fecha de entrega hasta que el proceso de aprobación haya concluido.</strong>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeCambioModal()">Cancelar</button>
+      <button class="modal-confirm" onclick="confirmCambio()">Entendido, continuar →</button>
     </div>
   </div>
 </div>
